@@ -4,12 +4,21 @@ body {
   width: 100%;
   padding: 0;
   margin: 0;
-  background: #fefefe;
+  /* If no CSS custom properties */
+  color: #111;
+  background-color: #fffff6;
+  /* If with CSS custom properties */
+  color: var(--c-foreground);
+  background-color: var(--c-background);
   font-family: sans-serif;
   font-weight: 400;
-  color: #111;
-  line-height: 1.5;
   font-size: 1.125rem;
+  line-height: 1.5;
+}
+
+:root {
+  --c-foreground: #111;
+  --c-background: #fffff6;
 }
 
 body {
@@ -40,4 +49,11 @@ p {
 time {
   font-weight: 700;
   font-size: 2rem;
+}
+
+@media (prefers-color-scheme: dark) {
+:root {
+  --c-foreground: #eee;
+  --c-background: #030936;
+}
 }

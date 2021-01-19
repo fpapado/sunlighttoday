@@ -1,4 +1,4 @@
-import { Router } from "preact-router";
+import { Fragment } from "preact";
 import { useEffect, useState } from "preact/hooks";
 
 const HELSINKI = { lat: 60.1699, lng: 24.9384 };
@@ -8,7 +8,7 @@ const WIT = [
   "We might make it through this yet 😬",
   "Blaze a trail 🔥",
   "If your sunlight is running low, ask a friend share some 🌇",
-  "Got extra sunlight? Share with friends ❤️"
+  "Got extra sunlight? Share with friends ❤️",
 ];
 
 async function getSunriseSunsetData({ lat, lng, date }) {
@@ -24,10 +24,13 @@ async function getSunriseSunsetData({ lat, lng, date }) {
 
 const App = () => {
   return (
-    <main>
-      <h1>Sunset today (in Helsinki)</h1>
-      <Sunset />
-    </main>
+    <Fragment>
+      <main>
+        <h1>Sunset today (in Helsinki)</h1>
+        <Sunset />
+      </main>
+      <footer></footer>
+    </Fragment>
   );
 };
 
@@ -100,10 +103,10 @@ function Comparison({ today, yesterday }) {
   }
   if (sign === -1) {
     // Do not give the numbers here, they're sad
-    return <p>That's less than yesterday :/</p>;
+    return <p>That's earlier than yesterday :/</p>;
   }
   // Here we party
-  return <p>Thats {diffMins} more minutes than yesterday 🎉</p>;
+  return <p>That's {diffMins} minutes later than yesterday 🎉</p>;
 }
 
 function compareMinutes(dateA, dateB) {

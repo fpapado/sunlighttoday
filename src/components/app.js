@@ -9,6 +9,8 @@ const WIT = [
   "Blaze a trail 🔥",
   "If your sunlight is running low, ask a friend share some 🌇",
   "Got extra sunlight? Share with friends ❤️",
+  "Even with cloud cover, longer days are a better chance at seeing the sun 🌞",
+  "I am running out of ideas for these aphorisms 🤷🏼",
 ];
 
 async function getSunriseSunsetData({ lat, lng, date }) {
@@ -29,7 +31,15 @@ const App = () => {
         <h1>Sunset today (in Helsinki)</h1>
         <Sunset />
       </main>
-      <footer></footer>
+      <footer>
+        <p>
+          Made with 😈 by{" "}
+          <a href="https://fotis.xyz">Fotis Papadogeorgopoulos</a>, using the{" "}
+          <a href="https://sunrise-sunset.org/api">Sunrise Sunset API</a>.{" "}
+          <a href="https://github.com/fpapado/sunlighttoday">Source on GitHub</a>
+          .
+        </p>
+      </footer>
     </Fragment>
   );
 };

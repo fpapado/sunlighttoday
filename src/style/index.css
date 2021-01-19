@@ -1,9 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --c-foreground: #111;
+  --c-background: #fffff6;
+  /* Sunset orange? */
+  --c-accent: #ce481e;
+}
+
 html,
 body {
   height: 100%;
   width: 100%;
   padding: 0;
   margin: 0;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
   /* If no CSS custom properties */
   color: #111;
   background-color: #fffff6;
@@ -16,17 +31,16 @@ body {
   line-height: 1.5;
 }
 
-:root {
-  --c-foreground: #111;
-  --c-background: #fffff6;
+a[href],
+a[href]:visited {
+  color: #ce481e;
+  color: var(--c-accent);
 }
 
 body {
   padding: 1rem;
-}
-
-* {
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 h1 {
@@ -35,15 +49,17 @@ h1 {
 }
 
 main {
+  max-width: 60ch;
   margin-left: auto;
   margin-right: auto;
-  max-width: 60ch;
+  padding-top: 2rem;
   text-align: center;
-  height: 100%;
 }
 
 p {
-  max-width: 60ch;
+  max-width: 50ch;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 time {
@@ -51,9 +67,16 @@ time {
   font-size: 2rem;
 }
 
-@media (prefers-color-scheme: dark) {
+footer {
+  margin-top: auto;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* @media (prefers-color-scheme: dark) { */
 :root {
   --c-foreground: #eee;
   --c-background: #030936;
-}
+  /* Match the smiling imp emoji */
+  --c-accent: #aa8dd8;
 }

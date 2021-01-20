@@ -1,26 +1,26 @@
-import { Fragment } from "preact";
-import { useEffect, useState } from "preact/hooks";
+import {Fragment} from 'preact';
+import {useEffect, useState} from 'preact/hooks';
 
-const HELSINKI = { lat: 60.1699, lng: 24.9384 };
+const HELSINKI = {lat: 60.1699, lng: 24.9384};
 
 const WIT = [
   "Go get'em 😊",
-  "We might make it through this yet 😬",
-  "Blaze a trail 🔥",
-  "If your sunlight is running low, ask a friend share some 🌇",
-  "Got extra sunlight? Share with friends ❤️",
-  "Even with cloud cover, longer days are a better chance at seeing the sun 🌞",
-  "I am running out of ideas for these aphorisms 🤷🏼",
+  'We might make it through this yet 😬',
+  'Blaze a trail 🔥',
+  'If your sunlight is running low, ask a friend to share some 🌇',
+  'Got extra sunlight? Share with friends ❤️',
+  'Even with cloud cover, longer days are a better chance at seeing the sun 🌞',
+  'I am running out of ideas for these aphorisms 🤷🏼',
 ];
 
-async function getSunriseSunsetData({ lat, lng, date }) {
-  const baseURL = new URL("https://api.sunrise-sunset.org/json");
-  baseURL.searchParams.set("lat", lat);
-  baseURL.searchParams.set("lng", lng);
-  baseURL.searchParams.set("date", date);
-  baseURL.searchParams.set("formatted", 0);
+async function getSunriseSunsetData({lat, lng, date}) {
+  const baseURL = new URL('https://api.sunrise-sunset.org/json');
+  baseURL.searchParams.set('lat', lat);
+  baseURL.searchParams.set('lng', lng);
+  baseURL.searchParams.set('date', date);
+  baseURL.searchParams.set('formatted', 0);
 
-  const res = await fetch(baseURL).then((res) => res.json());
+  const res = await fetch(baseURL).then(res => res.json());
   return res;
 }
 
@@ -33,10 +33,12 @@ const App = () => {
       </main>
       <footer>
         <p>
-          Made with 😈 by{" "}
-          <a href="https://fotis.xyz">Fotis Papadogeorgopoulos</a>, using the{" "}
-          <a href="https://sunrise-sunset.org/api">Sunrise Sunset API</a>.{" "}
-          <a href="https://github.com/fpapado/sunlighttoday">Source on GitHub</a>
+          Made with 😈 by{' '}
+          <a href="https://fotis.xyz">Fotis Papadogeorgopoulos</a>, using the{' '}
+          <a href="https://sunrise-sunset.org/api">Sunrise Sunset API</a>.{' '}
+          <a href="https://github.com/fpapado/sunlighttoday">
+            Source on GitHub
+          </a>
           .
         </p>
       </footer>
@@ -45,32 +47,32 @@ const App = () => {
 };
 
 function Sunset() {
-  const [today, setToday] = useState({ type: "loading" });
-  const [yesterday, setYesterday] = useState({ type: "loading" });
+  const [today, setToday] = useState({type: 'loading'});
+  const [yesterday, setYesterday] = useState({type: 'loading'});
 
   useEffect(() => {
-    getSunriseSunsetData({ ...HELSINKI, date: "today" })
-      .then((res) => setToday({ type: "success", data: res }))
-      .catch((error) => {
+    getSunriseSunsetData({...HELSINKI, date: 'today'})
+      .then(res => setToday({type: 'success', data: res}))
+      .catch(error => {
         console.error(error);
-        setToday({ type: "error", error });
+        setToday({type: 'error', error});
       });
   }, []);
 
   useEffect(() => {
-    getSunriseSunsetData({ ...HELSINKI, date: "yesterday" })
-      .then((res) => setYesterday({ type: "success", data: res }))
-      .catch((error) => {
+    getSunriseSunsetData({...HELSINKI, date: 'yesterday'})
+      .then(res => setYesterday({type: 'success', data: res}))
+      .catch(error => {
         console.error(error);
-        setYesterday({ type: "error", error });
+        setYesterday({type: 'error', error});
       });
   }, []);
 
-  if (today.type === "loading" || yesterday.type === "loading") {
+  if (today.type === 'loading' || yesterday.type === 'loading') {
     return <div>Loading...</div>;
   }
 
-  if (today.type === "error") {
+  if (today.type === 'error') {
     return (
       <div>
         <p>There was an error fetching the data</p>
@@ -85,14 +87,14 @@ function Sunset() {
     <div>
       <p>
         <time dateTime={sunsetToday.toISOString()}>
-          {sunsetToday.toLocaleString("en-GB", {
-            hour: "2-digit",
-            minute: "2-digit",
+          {sunsetToday.toLocaleString('en-GB', {
+            hour: '2-digit',
+            minute: '2-digit',
           })}
         </time>
       </p>
       {/* Do not block on yesterday error; just no comparison */}
-      {yesterday.type === "success" ? (
+      {yesterday.type === 'success' ? (
         <Comparison
           today={sunsetToday}
           yesterday={new Date(Date.parse(yesterday.data.results.sunset))}
@@ -103,7 +105,7 @@ function Sunset() {
   );
 }
 
-function Comparison({ today, yesterday }) {
+function Comparison({today, yesterday}) {
   const diffMins = compareMinutes(today, yesterday);
   const sign = Math.sign(diffMins);
 
@@ -120,7 +122,7 @@ function Comparison({ today, yesterday }) {
 }
 
 function compareMinutes(dateA, dateB) {
-  console.log({ dateA, dateB });
+  console.log({dateA, dateB});
   // Clone things, to avoid accidents (don't want to mutate the arguments) :)
   let a = new Date(dateA);
   let b = new Date(dateB);

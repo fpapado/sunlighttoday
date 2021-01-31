@@ -1,16 +1,22 @@
 {
-  "name": "Sunset Today",
-  "short_name": "sunlighttoday",
+  "name": "Sunset in Helsinki",
+  "short_name": "Sunset Helsinki",
   "start_url": "/",
   "display": "minimal-ui",
   "orientation": "portrait",
-  "background_color": "#fffff6",
   "theme_color": "#030936",
+  "background_color": "#030936",
   "icons": [
     {
-      "src": "/assets/icons/v1-240.png",
+      "src": "/assets/icons/v2-240.png",
       "type": "image/png",
       "sizes": "240x240"
+    },
+    {
+      "src": "/assets/icons/v2-240-maskable.png",
+      "type": "image/png",
+      "sizes": "240x240",
+      "purpose": "maskable"
     }
   ]
 }

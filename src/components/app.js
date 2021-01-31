@@ -140,7 +140,8 @@ function Comparison({ today, yesterday }) {
     return <p>That's earlier than yesterday :/</p>;
   }
   // Here we party
-  return <p>That's {diffMins} minutes later than yesterday 🎉</p>;
+  // Show one decimal, for extra sunlight
+  return <p>That's {diffMins.toFixed(1)} minutes later than yesterday 🎉</p>;
 }
 
 function compareMinutes(dateA, dateB) {
@@ -158,7 +159,7 @@ function compareMinutes(dateA, dateB) {
   // I won't bother with trying to do formatting like "1 hour 2 minutes"
   // Saying "62 minutes" is fine, and probably only happens with datetime diffs
   // (a case which I'm not sure we're handling OK anyway) :shrug:
-  const diffMins = Math.floor(diffMs / 1000 / 60); // minutes
+  const diffMins = (diffMs / 1000 / 60); // minutes
 
   return diffMins;
 }

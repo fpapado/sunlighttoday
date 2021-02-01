@@ -1,4 +1,6 @@
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -7,6 +9,7 @@
   --c-background: #030936;
   /* Match the smiling imp emoji */
   --c-accent: #aa8dd8;
+  --c-sunset: #f55924;
 }
 
 html,
@@ -71,4 +74,65 @@ footer {
   margin-top: auto;
   font-size: 1rem;
   text-align: center;
+}
+
+button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  -webkit-appearance: none;
+}
+
+.confetti-cannon {
+  margin-top: 2rem;
+  padding: 0.5rem;
+  min-width: 44px;
+  min-height: 44px;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background-color: var(--c-accent);
+  color: var(--c-background);
+  border: 2px solid var(--c-accent);
+  line-height: 1.25;
+  font-size: 0.75rem;
+  box-shadow: 0px 0px 2px 2px #676767;
+  transition: background-color 0.12s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+/* Progressively-enhance :focus-visible */
+.confetti-cannon:focus {
+  outline: 2px solid transparent;
+  border-color: black;
+  box-shadow: 0 0 0 4px var(--c-sunset);
+}
+
+.confetti-cannon:focus:not(:focus-visible) {
+  outline: none;
+  border-color: var(--c-accent);
+  box-shadow: 0px 0px 2px 2px #676767
+}
+
+.confetti-cannon:focus-visible {
+  outline: 2px solid transparent;
+  border-color: black;
+  box-shadow: 0 0 0 4px var(--c-sunset);
+}
+
+/* Style active, do not hide box-shadow (and thus focus style) */
+.confetti-cannon:active {
+  background-color: #9e7bd5;
+}
+
+/* Style active, hide box-shadow (and thus focus style) */
+.confetti-cannon:active:not(:focus-visible) {
+  background-color: #9e7bd5;
+  box-shadow: none;
 }

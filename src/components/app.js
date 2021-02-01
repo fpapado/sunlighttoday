@@ -1,5 +1,6 @@
 import { Fragment } from "preact";
 import { useEffect, useState } from "preact/hooks";
+import confetti from "canvas-confetti";
 
 const HELSINKI = { lat: 60.1699, lng: 24.9384 };
 
@@ -123,6 +124,17 @@ function Sunset() {
         />
       ) : null}
       <p class="wit">{getRandomWit()}</p>
+      <button
+        className="confetti-cannon"
+        onClick={(ev) => {
+          ev.preventDefault();
+          fireConfetti();
+        }}
+      >
+        🎉
+        <br />
+        Launch confetti
+      </button>
     </div>
   );
 }
@@ -169,6 +181,45 @@ function compareMinutes(dateA, dateB) {
 
 function getRandomWit() {
   return WIT[Math.floor(Math.random() * WIT.length)];
+}
+
+// @see https://www.kirilv.com/canvas-confetti/
+function fireConfetti() {
+  fire(0.25, {
+    spread: 26,
+    startVelocity: 55,
+  });
+  fire(0.2, {
+    spread: 60,
+  });
+  fire(0.35, {
+    spread: 100,
+    decay: 0.91,
+    scalar: 0.8,
+  });
+  fire(0.1, {
+    spread: 120,
+    startVelocity: 25,
+    decay: 0.92,
+    scalar: 1.2,
+  });
+  fire(0.1, {
+    spread: 120,
+    startVelocity: 45,
+  });
+}
+
+function fire(particleRatio, opts) {
+  confetti(
+    {
+      origin: { y: 0.7 },
+      colors: ["#53257D", "#DD7380", "#f55924", "#A47836"],
+      ...opts,
+    },
+    {
+      particleCount: Math.floor(200 * particleRatio),
+    }
+  );
 }
 
 export default App;

@@ -129,6 +129,7 @@ function Sunset() {
 
 function Comparison({ today, yesterday }) {
   const diffMins = compareMinutes(today, yesterday);
+  console.log(today, yesterday, diffMins);
   const sign = Math.sign(diffMins);
 
   if (sign === 0) {
@@ -145,11 +146,13 @@ function Comparison({ today, yesterday }) {
 }
 
 function compareMinutes(dateA, dateB) {
-  // Clone things, to avoid accidents (don't want to mutate the arguments) :)
+  // Clone dates to avoid mutating the arguments
   let a = new Date(dateA);
   let b = new Date(dateB);
 
-  // Pretend that date A is on the same day as date B
+  // Pretend that date A is on the same day as date B (so that we only compare milliseconds on the order of hours)
+  // NOTE: If you set these the other way around, the date rolls over further :/
+  a.setMonth(b.getMonth());
   a.setDate(b.getDate());
 
   // Then, compare the difference in milliseconds (which will be at most hours)
@@ -159,7 +162,7 @@ function compareMinutes(dateA, dateB) {
   // I won't bother with trying to do formatting like "1 hour 2 minutes"
   // Saying "62 minutes" is fine, and probably only happens with datetime diffs
   // (a case which I'm not sure we're handling OK anyway) :shrug:
-  const diffMins = (diffMs / 1000 / 60); // minutes
+  const diffMins = diffMs / 1000 / 60; // minutes
 
   return diffMins;
 }

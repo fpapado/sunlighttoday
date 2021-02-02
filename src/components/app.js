@@ -133,7 +133,9 @@ function Sunset() {
       >
         🎉
         <br />
-        Launch confetti
+        Launch
+        <br />
+        confetti
       </button>
     </div>
   );
